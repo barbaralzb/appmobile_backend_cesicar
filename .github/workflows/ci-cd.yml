@@ -3,7 +3,7 @@ name: CI/CD to Docker
 on:
   push:
     branches:
-      - main  # Cambia esto al nombre de tu rama principal si es diferente
+      - main
 
 jobs:
   build:
@@ -14,9 +14,9 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build Docker Image
-      run: docker build -t tuimagen:latest .
+      run: docker build -t app:1 .
 
-    - name: Push Docker Image to Docker Hub (o tu registro preferido)
+    - name: Push Docker Image to Docker Hub
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker tag tuimagen:latest tuusuario/tuimagen:latest
