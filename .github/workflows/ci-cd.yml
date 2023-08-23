@@ -47,7 +47,7 @@ jobs:
       # - uses: webfactory/ssh-agent@v0.7.0
       - name: Connect to VM and update repository
         run: |
-          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          echo ${{ secrets.SSH_KEY }} > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd appmobile_backend_cesicar/ && git pull && npm install && npm run build && pm2 restart all"
 
