@@ -19,5 +19,5 @@ jobs:
     - name: Push Docker Image to Docker Hub
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker tag tuimagen:latest tuusuario/tuimagen:latest
-        docker push tuusuario/tuimagen:latest
+        docker tag app:1 barbaralzb/app:1
+        docker push barbaralzb/app:1
