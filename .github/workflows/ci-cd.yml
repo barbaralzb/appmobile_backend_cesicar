@@ -44,15 +44,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: webfactory/ssh-agent@v0.7.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
+      # - uses: webfactory/ssh-agent@v0.7.0
+       - name: Connect to VM and update repository
+        run : ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} && cd cesi-devops-test-cdci/ && git pull && npm install && npm run build && pm2 restart all
+      #   with:
+      #     ssh-private-key: ${{ secrets.SSH_KEY }}
 
-      - run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "\
-          cd appmobile_backend_cesicar && \
-          git pull && \
-          npm install && \
-          npm run build && \
-          pm2 restart all"
-          
+      # - run: |
+      #     ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "\
+      #     cd appmobile_backend_cesicar && \
+      #     git pull && \
+      #     npm install && \
+      #     npm run build && \
+      #     pm2 restart all"
