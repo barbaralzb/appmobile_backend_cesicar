@@ -46,7 +46,12 @@ jobs:
     steps:
       # - uses: webfactory/ssh-agent@v0.7.0
       - name: Connect to VM and update repository
-        run : ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} && cd appmobile_backend_cesicar/ && git pull && npm install && npm run build && pm2 restart all
+        run: |
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd appmobile_backend_cesicar/ && git pull && npm install && npm run build && pm2 restart all"
+
+        # run : ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_KEY }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} && cd appmobile_backend_cesicar/ && git pull && npm install && npm run build && pm2 restart all
       #   with:
       #     ssh-private-key: ${{ secrets.SSH_KEY }}
 
