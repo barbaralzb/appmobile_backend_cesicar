@@ -1,0 +1,15 @@
+# Usar una imagen base de Node.js
+FROM node:18
+
+RUN npm i -g nodemon
+
+# Crear el directorio /home/app en el contenedor
+RUN mkdir -p /home/app
+
+WORKDIR /home/app
+
+# Exponer el puerto en el que funciona tu aplicación (por ejemplo, 5000)
+EXPOSE 5000
+
+# Especificar el comando para ejecutar la aplicación
+CMD ["npm", "run", "dev"]
