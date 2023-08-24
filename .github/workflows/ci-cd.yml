@@ -38,7 +38,7 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker tag appmobile_backend_cesicar-image:latest ${{ secrets.DOCKER_USERNAME }} /appmobile_backend_cesicar-image:latest
+          docker tag appmobile_backend_cesicar-image:latest ${{ secrets.DOCKER_USERNAME }}/appmobile_backend_cesicar-image:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/appmobile_backend_cesicar-image:latest
 
   deploy:
@@ -60,7 +60,8 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd server_cesicar && cd appmobile_backend_cesicar && docker-compose pull && barbaralzb/appmobile_backend_cesicar-image:latest && docker-compose up -d"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd server_cesicar && cd appmobile_backend_cesicar && docker-compose pull && docker-compose up -d"
+
 
       # - name: Restart PM2
       #   run: |
