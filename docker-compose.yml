@@ -3,7 +3,7 @@ version: "3.9"
 services:
     appmobile_backend_cesicar:
         container_name: appmobile_backend_cesicar-container
-        image: appmobile_backend_cesicar-image:latest
+        # image: appmobile_backend_cesicar-image:latest
         build: .
         dockerfile: Dockerfile
         ports:
