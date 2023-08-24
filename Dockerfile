@@ -23,7 +23,7 @@ COPY . /home/app/
 RUN npm install
 
 # Exponer el puerto en el que funciona tu aplicación (por ejemplo, 5000)
-EXPOSE 3000
+EXPOSE 5000
 
 # Especificar el comando para ejecutar la aplicación
 CMD ["npm", "run", "dev"]
