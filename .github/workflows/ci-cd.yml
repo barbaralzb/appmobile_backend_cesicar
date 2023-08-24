@@ -60,7 +60,7 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd appmobile_backend_cesicar/ && docker-compose build appmobile_backend_cesicar && docker-compose pull && docker-compose up -d && pm2 restart appmobile_backend_cesicar"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd appmobile_backend_cesicar && docker-compose pull && docker-compose up -d && pm2 restart appmobile_backend_cesicar"
 
 
       # - name: Restart PM2
