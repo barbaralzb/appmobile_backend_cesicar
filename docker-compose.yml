@@ -3,9 +3,10 @@ version: "3.9"
 services:
     appmobile_backend_cesicar:
         container_name: appmobile_backend_cesicar-container
+        build: 
+            context : .
+            dockerfile: Dockerfile
         image: barbaralzb/appmobile_backend_cesicar-image:latest
-        build: .
-        dockerfile: Dockerfile
         ports:
             - 5000:5000
         volumes:
