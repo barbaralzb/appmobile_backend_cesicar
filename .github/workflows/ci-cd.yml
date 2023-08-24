@@ -63,11 +63,15 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd appmobile_backend_cesicar && docker-compose pull && docker-compose up -d"
           
 
-      - name: Restart Nginx
+      - name: Stop Nginx
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo systemctl restart nginx"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo systemctl stop nginx"
 
       - name: Restart PM2
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd appmobile_backend_cesicar && pm2 restart appmobile_backend_cesicar"
+
+      - name: Start Nginx
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo systemctl start nginx"
 
