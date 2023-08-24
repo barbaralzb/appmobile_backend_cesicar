@@ -25,7 +25,7 @@ const db = new Sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_USER, pro
 (async () => {
     try {
         // await db.sync({ force: true }); // Usa { force: true } solo en desarrollo para recrear las tablas
-        console.log('Database synchronized successfully');
+        console.log('Database synchronized successfully 👽');
     } catch (error) {
         console.error('Error synchronizing database:', error);
     }
