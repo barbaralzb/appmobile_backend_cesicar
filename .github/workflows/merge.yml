@@ -6,9 +6,9 @@ on:
       - develop
 
 jobs:
-  test:
+  merge:
     runs-on: ubuntu-latest
-
+    needs: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -20,8 +20,3 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Run unit tests in Docker
-        run: |
-          docker build -t appmobile_backend_cesicar .
-          docker run appmobile_backend_cesicar npm test
