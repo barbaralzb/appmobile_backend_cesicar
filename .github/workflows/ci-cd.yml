@@ -61,10 +61,10 @@ jobs:
       - name: Stop Nginx
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo systemctl stop nginx"
-          
+
       - name: Deploy to Server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd appmobile_backend_cesicar && docker-compose pull && docker-compose up -d"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd appmobile_backend_cesicar && docker-compose pull && docker-compose up -d && npm run dev"
 
       - name: Restart PM2
         run: |
