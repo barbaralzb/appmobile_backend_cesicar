@@ -1,7 +1,11 @@
-const app = require('../app');
+const suma = require('../suma');
 
-test('debería crear una instancia de la aplicación Express sin errores', () => {
-  expect(() => {
-    app.listen(5000, () => {});
-  }).not.toThrow();
+test('debería sumar dos números correctamente', () => {
+  const resultado = suma(2, 3);
+  expect(resultado).toBe(5);
+});
+
+test('debería manejar números negativos', () => {
+  const resultado = suma(-1, 1);
+  expect(resultado).toBe(0);
 });
