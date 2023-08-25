@@ -1,4 +1,4 @@
-name: CI
+name: Merge to Main if Tests Pass
 
 on:
   push:
@@ -6,22 +6,25 @@ on:
       - develop
 
 jobs:
-  build:
+  merge:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+    - name: Set up Git
+      run: git config --global user.email "barbaralizama.proj@gmail.com" && git config --global user.name "Barbara"
 
-      - name: Install dependencies
-        run: npm install
+    - name: Run Tests
+      run: npm test
 
-      - name: Run unit tests in Docker
-        run: |
-          docker build -t appmobile_backend_cesicar .
-          docker run appmobile_backend_cesicar npm test
+    - name: Merge to Main if Tests Pass
+      run: |
+        if [ ${{ success() }} = true ]; then
+          git checkout main
+          git merge --no-ff develop -m "Merge develop into main"
+          git push origin main
+        else
+          echo "Tests failed, not merging to main."
+        fi
