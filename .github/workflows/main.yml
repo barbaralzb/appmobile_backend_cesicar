@@ -1,27 +1,27 @@
 name: CI
 
 on:
-    push:
-        branches:
-            - develop
+  push:
+    branches:
+      - develop
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout code
-                uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-            - name: Set up Node.js
-                uses: actions/setup-node@v2
-                with:
-                    node-version: 18
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-            - name: Install dependencies
-                run: npm install
+      - name: Install dependencies
+        run: npm install
 
-            - name: Run unit tests in Docker
-                run: |
-                    docker build -t appmobile_backend_cesicar .
-                    docker run appmobile_backend_cesicar npm test
+      - name: Run unit tests in Docker
+        run: |
+          docker build -t appmobile_backend_cesicar .
+          docker run appmobile_backend_cesicar npm test
