@@ -207,6 +207,32 @@ exports.getUserById = asyncHandler(async (req, res) => {
   }
 });
 
+exports.deleteUser = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Verificar si el usuario que quiere eliminar es el mismo que está autenticado
+    if (req.userId !== Number(id)) {
+      return res.status(403).json({ error: 'No tienes permiso para eliminar este usuario' });
+    }
+
+    // Buscar el usuario en la base de datos
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    // Eliminar el usuario de la base de datos
+    await user.destroy();
+
+    // Devolver una respuesta de éxito
+    return res.json({ message: 'Usuario eliminado exitosamente' });
+  } catch (error) {
+    console.error('Error al eliminar el usuario:', error);
+    return res.status(500).json({ error: 'Error en el servidor' });
+  }
+});
 
 
 
