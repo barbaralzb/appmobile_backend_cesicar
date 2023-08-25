@@ -25,3 +25,21 @@ jobs:
         run: |
           docker build -t appmobile_backend_cesicar .
           docker run appmobile_backend_cesicar npm test
+
+
+  merge:
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
