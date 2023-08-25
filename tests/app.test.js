@@ -1,4 +1,4 @@
-const app = require('./app');
+const app = require('../app');
 
 test('debería crear una instancia de la aplicación Express sin errores', () => {
   expect(() => {
