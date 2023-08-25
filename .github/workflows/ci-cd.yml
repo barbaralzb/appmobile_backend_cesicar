@@ -68,7 +68,7 @@ jobs:
 
       - name: Restart PM2
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd appmobile_backend_cesicar && pm2 start appmobile_backend_cesicar"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "pm2 start appmobile_backend_cesicar"
 
       - name: Start Nginx
         run: |
