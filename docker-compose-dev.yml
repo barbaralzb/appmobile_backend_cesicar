@@ -1,43 +1,20 @@
 version: "3.9"
 
 services:
-    server:
+    appmobile_backend_cesicar:
+        container_name: appmobile_backend_cesicar-container
         build: 
-            context: .
+            context : .
             dockerfile: Dockerfile.dev
-        container_name: server_cesicar
+        image: barbaralzb/appmobile_backend_cesicar-image:latest
         ports:
-            - 5000:5000
-        links:
-            - db
+            - 3000:3000
         volumes:
             - .:/home/app
+        networks:
+            - api_cesicar_default  # Conecta el servicio a la red existente
 
-
-    db:
-        image: mysql
-        container_name: db_cesicar
-        restart: always
-        volumes:
-            - db-data:/var/lib/mysql
-        ports:
-            - 3306:3306
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: api_cesicar
-            MYSQL_USER: api_cesicar
-            MYSQL_PASSWORD: api_cesicar
-
-
-    phpmyadmin:
-        image: phpmyadmin
-        container_name: phpmyadmni_cesicar
-        depends_on:
-            - db
-        ports:
-            - 8080:8080
-        environment:
-            PMA_HOST: db
-volumes:
-    db-data:
-
+networks:
+    api_cesicar_default:
+        external:
+            name: api_cesicar_default  # Nombre de la red existente

@@ -1,15 +1,20 @@
-# Usar una imagen base de Node.js
-FROM node:18
+# Utiliza una imagen de Node.js como base
+FROM node:14
 
-RUN npm i -g nodemon
+# Establece el directorio de trabajo en el contenedor
+WORKDIR /app
 
-# Crear el directorio /home/app en el contenedor
-RUN mkdir -p /home/app
+# Copia el package.json y package-lock.json para instalar dependencias
+COPY package*.json ./
 
-WORKDIR /home/app
+# Instala las dependencias
+RUN npm install
 
-# Exponer el puerto en el que funciona tu aplicación (por ejemplo, 5000)
-EXPOSE 5000
+# Copia el resto de los archivos de la aplicación
+COPY . .
 
-# Especificar el comando para ejecutar la aplicación
+# Expone el puerto en el que se ejecutará la aplicación (ajusta según tu configuración)
+EXPOSE 3000
+
+# Comando para ejecutar la aplicación en modo desarrollo
 CMD ["npm", "run", "dev"]
